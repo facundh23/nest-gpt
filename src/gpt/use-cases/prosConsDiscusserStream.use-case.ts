@@ -3,9 +3,10 @@ import OpenAI from "openai";
 interface Options {
     prompt: string
 }
-export const prosConsDiscusserUseCase = async (openai: OpenAI, {prompt}: Options) => {
+export const prosConsDiscusserStreamUseCase = async (openai: OpenAI, {prompt}: Options) => {
    
-    const completion = await openai.chat.completions.create({
+    return await openai.chat.completions.create({
+        stream:true,
         messages: [
             {
                 role: 'system', 
@@ -22,7 +23,6 @@ export const prosConsDiscusserUseCase = async (openai: OpenAI, {prompt}: Options
       
     })
 
-    const jsonResp = completion.choices[0].message;
+    
    
-    return jsonResp;
 }
