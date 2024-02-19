@@ -22,7 +22,7 @@ export class GptService {
   async prosConsDiscusserStream(prosConsDiscusserDto: ProsConsDiscusserDto){
     return await prosConsDiscusserStreamUseCase(this.openai, {prompt:prosConsDiscusserDto.prompt,});
   }
-  async translateStream(translateDto: TranslateDto){
-    return await translateUseCase(this.openai, {prompt:translateDto.prompt, lang:translateDto.prompt});
+  async translateStream({prompt, lang}: TranslateDto){
+    return await translateUseCase(this.openai, {prompt:prompt, lang:lang});
   }
 }
