@@ -29,18 +29,22 @@ export class GptController {
 
     res.end();
   }
+  // @Post('translate')
+  // async trasnlateStream(@Body() translateDto:TranslateDto, @Res() res: Response,){
+  //   const stream = await this.gptService.translateStream(translateDto);
+  //   res.setHeader('Content-type', 'application/json');
+  //   res.status(HttpStatus.OK)
+
+  //   for await (const chunk of stream){
+  //     const piece = chunk.choices[0].delta.content || '';
+  //     console.log(piece);
+  //     res.write(piece)
+  //   }
+
+  //   res.end();
+  // }
   @Post('translate')
-  async trasnlateStream(@Body() translateDto:TranslateDto, @Res() res: Response,){
-    const stream = await this.gptService.translateStream(translateDto);
-    res.setHeader('Content-type', 'application/json');
-    res.status(HttpStatus.OK)
-
-    for await (const chunk of stream){
-      const piece = chunk.choices[0].delta.content || '';
-      console.log(piece);
-      res.write(piece)
-    }
-
-    res.end();
+  translate(@Body() translateDto:TranslateDto){
+    return this.gptService.translateStream(translateDto);
   }
 }

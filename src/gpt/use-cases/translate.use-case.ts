@@ -6,8 +6,8 @@ interface Options {
 }
 export const translateUseCase = async (openai: OpenAI, {prompt, lang}: Options) => {
    
-    return await openai.chat.completions.create({
-        stream:true,
+    const completion =  await openai.chat.completions.create({
+        // stream:true,
         messages: [
             {
                 role: 'system', 
@@ -20,6 +20,8 @@ export const translateUseCase = async (openai: OpenAI, {prompt, lang}: Options) 
       
     })
 
-    
+    const jsonResp = completion.choices[0].message;
+   
+    return jsonResp;
    
 }
