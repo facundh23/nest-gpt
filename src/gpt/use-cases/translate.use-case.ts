@@ -21,7 +21,7 @@ export const translateUseCase = async (openai: OpenAI, {prompt, lang}: Options) 
     })
 
     const jsonResp = completion.choices[0].message;
-   
+ 
     return jsonResp;
    
 }
