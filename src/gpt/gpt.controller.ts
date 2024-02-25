@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Res, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { GptService } from './gpt.service';
 import { OrthographyDto, ProsConsDiscusserDto, TranslateDto } from './dtos';
 import { Response } from 'express';
@@ -65,4 +66,13 @@ export class GptController {
     res.status(HttpStatus.OK);
     res.sendFile(filePath);
   }
+
+  @Post('audio-to-text')
+  @UseInterceptors(
+    FileInterceptor()
+  )
+  async audioToText(){
+    
+  }
+
 }
