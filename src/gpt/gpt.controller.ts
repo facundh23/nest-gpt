@@ -7,6 +7,7 @@ import { GptService } from './gpt.service';
 import { OrthographyDto, ProsConsDiscusserDto, TranslateDto } from './dtos';
 import { Response } from 'express';
 import { TextToAudioDto } from './dtos/text-to-audio.dto';
+import { AudioToTextDto } from './dtos/audio-to-text.dto';
 
 @Controller('gpt')
 export class GptController {
@@ -95,9 +96,11 @@ export class GptController {
           new FileTypeValidator({fileType:'audio/*'})
         ]
       })
-    ) file: Express.Multer.File
+    ) file: Express.Multer.File,
+    @Body('prompt') audioToTextDto:AudioToTextDto
   ){
-    return  this.gptService.audioToText(file);
+    
+    return  this.gptService.audioToText(file, audioToTextDto);
   }
 
 }

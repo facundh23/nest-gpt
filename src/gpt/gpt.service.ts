@@ -6,6 +6,7 @@ import {  ProsConsDiscusserDto, TextToAudioDto } from './dtos';
 import OpenAI from 'openai';
 import { OrthographyDto } from './dtos/orthography.dto';
 import { TranslateDto } from './dtos/translate.dto';
+import { AudioToTextDto } from './dtos/audio-to-text.dto';
 
 
 @Injectable()
@@ -40,7 +41,8 @@ export class GptService {
     return filePath;
   }
 
-  async audioToText( audioFile: Express.Multer.File, prompt?:string,){
+  async audioToText( audioFile: Express.Multer.File, audioToTextDto?:AudioToTextDto,){
+    const {prompt} = audioToTextDto;
     return await audioToTextUseCase(this.openai, {audioFile, prompt})
   }
 }
